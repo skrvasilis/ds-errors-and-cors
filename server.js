@@ -1,12 +1,17 @@
 const express = require("express");
 const app = express();
+const cors = require("cors")
+
+app.use(cors())
+
 
 app.get("/getme", (req, res) => {
   res.send(fruits);
 });
 
 app.post("/postme", (req, res) => {
-  res.send({});
+  console.log('postme')
+  res.send({message: "you made it?"});
 });
 
 app.listen(5000, () => {
@@ -17,7 +22,7 @@ app.listen(5000, () => {
 
 app.use((req, res, next) => {
   let error = { message: `The route ${req.url} does not exist`, code: 404 };
-   next(error);
+  next(error);
 });
 
 app.get("/fuckup/saw-it-coming", (req, res, next) => {
